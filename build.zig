@@ -7,17 +7,10 @@ pub fn build(b: *std.Build) void {
     const exe = b.addExecutable(.{
         .name = "main",
         .root_module = b.createModule(.{
+            .root_source_file = b.path("src/main.zig"),
             .target = target,
             .optimize = optimize,
         }),
-    });
-
-    // add the C source file
-    exe.addCSourceFile(.{
-        .file = b.path("main.c"),
-        .flags = &[_][]const u8{
-            "-std=c11",
-        },
     });
 
     // link raylib
